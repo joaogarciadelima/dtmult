@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Dutty{% endblock title %}</title>
+
+    <meta name="description" content="{% block description %}TotaoLabs{% endblock description %}">
+    <meta name="author" content="TotaoLabs!">
+
+    <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static '/css/style.css' %}" rel="stylesheet">
+    <script src="{% static '/js/jquery.min.js' %}"></script>
+    <script src="{% static '/js/bootstrap.min.js' %}"></script>
+    <script src="{% static '/js/scripts.js' %}"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom" style="background-color: #253b50;">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="{% url 'base:home' %}">Home</a>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="navbar-nav">
+        </ul>
+        <ul class="navbar-nav ml-md-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Link <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                   data-toggle="dropdown">Dropdown link</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a
+                        class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider">
+                    </div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% block body %}{% endblock body %}
+
+<footer class="main-footer mt-5 pt-4 text-light">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Entre em Contato</h3>
+                <address>
+                    +559999983236
+                    </br>
+                    <a href="mailto:dutty@dutty.com" class="text-light">dutty@dutty.com</a>
+                </address>
+            </div>
+
+        </div>
+    </div>
+    <div class="rights">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    {% now 'Y' %} Dutty. Todos os direitos reservados!
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

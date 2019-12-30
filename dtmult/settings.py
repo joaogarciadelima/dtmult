@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'collectfast',
     'django.contrib.staticfiles',
     'dtmult.base',
+    'dtmult.propriedades',
 ]
 
 MIDDLEWARE = [

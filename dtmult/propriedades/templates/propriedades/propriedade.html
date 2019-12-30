@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Propriedades{% endblock title %}
+{% block description %}Página de exibição das propriedades{% endblock description %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="mt-4 mb-3">{{ propriedade.nome | default:"Faltando Nome" }}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

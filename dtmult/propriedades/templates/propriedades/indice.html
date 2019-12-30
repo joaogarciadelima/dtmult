@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Dutty - Propriedades{% endblock title %}
+{% block description %}Página as propriedades disponíveis{% endblock description %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="mt-4 mb-3">Lista de propriedades</h1>
+                <ol>
+                    {% for propriedade in propriedades %}
+                        <li><a href="{{ propriedade.get_absolute_url }}">{{ propriedade.nome | default:"Faltando Nome" }}</a></li>
+                    {% empty %}
+                        <li>Não foi encontrada nenhuma propriedade</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

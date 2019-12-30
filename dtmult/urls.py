@@ -20,7 +20,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('dtmult.base.urls'))
+    path('', include('dtmult.base.urls')),
+    path('propriedades/', include('dtmult.propriedades.urls')),
 ]
 
 if settings.DEBUG:

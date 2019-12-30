@@ -18,7 +18,7 @@ from django.utils.translation import gettext, gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 
-from dtmult.base.models import User, UserProfile
+from dtmult.base.models import User, Profile
 
 csrf_protect_m = method_decorator(csrf_protect)
 sensitive_post_parameters_m = method_decorator(sensitive_post_parameters())
@@ -191,15 +191,21 @@ class UserAdmin(admin.ModelAdmin):
         return super().response_add(request, obj, post_url_continue)
 
 
-class UserProfileInline(admin.StackedInline):
-    model = UserProfile
+class ProfileInline(admin.StackedInline):
+    model = Profile
     can_delete = False
     verbose_name_plural = 'Profile'
     fk_name = 'user'
 
 
 class CustomUserAdmin(UserAdmin):
-    inlines = (UserProfileInline,)
+    inlines = (ProfileInline, )
+    list_display = ('email', 'first_name', 'is_staff')
+    list_select_related = ('profile', )
+
+    # def get_location(self, instance):
+    #     return instance.profile.location
+    # get_location.short_description = 'Location'
 
     def get_inline_instances(self, request, obj=None):
         if not obj:

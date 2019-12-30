@@ -1,6 +1,8 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.core.mail import send_mail
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.db import models
@@ -92,9 +94,34 @@ class User(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
-class UserProfile(models.Model):
+class Profile(models.Model):
+    PROP_VENDEDOR = 1
+    PROP_COMPRADOR = 2
+    LOCATARIO = 3
+    ROLE_CHOICES = (
+        (PROP_VENDEDOR, 'Proprietário Vendedor'),
+        (PROP_COMPRADOR, 'Proprietário comprador'),
+        (LOCATARIO, 'Locatário'),
+    )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to='profiles/')
+    # endereco = models.CharField(max_length=10,)
+    # numero = models.CharField(max_length=10, blank=True, null=True)
+    # complemento = models.CharField(max_length=30, blank=True, null=True)
+    # bairro = models.CharField(max_length=32, null=True)
+    # cep = models.CharField(max_length=8, blank=True)
+    data_nascimento = models.DateField(null=True, blank=True)
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True, blank=True)
 
     class Meta:
-        verbose_name_plural = "Profiles"
+        verbose_name = 'profile'
+        verbose_name_plural = 'profiles'
+
+    def __str__(self):
+        return self.user.email
+
+
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()

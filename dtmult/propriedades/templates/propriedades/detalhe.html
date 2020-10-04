@@ -1,20 +1,22 @@
 {% extends 'base/base.html' %}
 {% load static %}
-{% block title %}{{propriedade.nome}}{% endblock title %}
-{% block description %}Página com detalhes das propriedades {{ propriedade.nome }}{% endblock description %}
+{% block title %}{{detalhe.nome}}{% endblock title %}
+{% block description %}Página dos tipos de multipropriedades existentes{% endblock description %}
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mt-4 mb-3">{{ propriedade.nome}}</h1>
+                <h1 class="mt-4 mb-3">{{detalhe.nome}}</h1>
                 <dl>
+                    <dt>Tipo multipropriedade</dt>
+                    <dd>{{ detalhe.nome }}</dd>
                     <dt>Descrição</dt>
-                    <dd>{{ propriedade.descricao }}</dd>
+                    <dd>{{ detalhe.descricao }}</dd>
                 </dl>
                 <h2>Propriedades</h2>
                 <ol>
                     {% for propriedade in propriedades %}
-                        <li>{{ propriedade.titulo }}</li>
+                        <li>{{ propriedade.nome }}</li>
                     {% endfor %}
                 </ol>
             </div>

@@ -22,6 +22,10 @@ collectfast = "*"
 django-debug-toolbar = "*"
 sentry-sdk = "*"
 pillow = "*"
+djangorestframework = "*"
+django-ordered-model = "*"
+django-extensions = "*"
+ipython = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"
